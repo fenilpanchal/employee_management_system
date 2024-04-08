@@ -4,11 +4,11 @@ package com.stevenhornghub.promotionrequest.controllers;
 import com.stevenhornghub.promotionrequest.models.User;
 import com.stevenhornghub.promotionrequest.models.UserSearchRequest;
 import com.stevenhornghub.promotionrequest.services.EmployeeService;
-
-import javax.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 
 /**
@@ -44,7 +44,8 @@ public class EmployeeController {
      * @return
      */
     @PostMapping("/search")
-    public Page<User> searchEmployees(@Valid @RequestBody UserSearchRequest userSearchRequest) {
+    public Page<User> searchEmployees(@Valid @RequestBody UserSearchRequest userSearchRequest,
+                                      HttpServletRequest request) {
         return employeeService.searchEmployees(userSearchRequest);
     }
 
