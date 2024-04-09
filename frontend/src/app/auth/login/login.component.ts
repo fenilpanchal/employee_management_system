@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit{
     console.log("user is login")
     this.userservice.addUser(this.user)
     .subscribe((data: any) => {
-      console.info(data);
+      console.info(data.body);
       // Condition: isAdmin
-      if (data && data.admin) {
-        localStorage.setItem("user", JSON.stringify(data));
+      if (data.body && data.body.admin == true) {
+        localStorage.setItem("user", JSON.stringify(data.body));
         this.route.navigate(['/admin-emp']);
       } else {
         this.route.navigate(['/employee']);

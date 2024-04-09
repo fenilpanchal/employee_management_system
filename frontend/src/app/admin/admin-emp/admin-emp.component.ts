@@ -24,17 +24,25 @@ export class AdminEmpComponent implements OnInit {
     private userService: UserService
   ) {}
   
-  employees: any[] = [];
-  currentPage = 1;
-  pageSize = 10;
+  employees: any[] = [
+    { id: 1, "firstName": "Dilip"}
+  ];
+  currentPage = 0;
+  pageSize = 100;
 
   ngOnInit(): void {
     this.loadEmployees();
   }
 
   loadEmployees(): void {
-    this.userService.getEmployees(this.currentPage, this.pageSize)
-      .subscribe((data: any) => {
+    const params = {
+      searchKey: undefined,
+      searchValue: undefined,
+      sortBy: "firstName",
+      offset: this.currentPage,
+      limit: this.pageSize
+    };
+    this.userService.getEmployees(params).subscribe((data: any) => {
         this.employees = data;
       });
   }

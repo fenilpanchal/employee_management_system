@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/internal/Observable';
@@ -12,6 +12,13 @@ export class UserService {
   
   baseUrl='http://localhost:9081';
   postUser: any;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+       
+    withCredentials: true, 
+    observe: 'response' as 'response'
+  };  
   
   constructor(private http:HttpClient) { }
   
@@ -19,20 +26,16 @@ export class UserService {
     console.log("User...");
   }
 
-  addUser(user: User): Observable <User> {
+  addUser(user: User) {
     console.log(user)
-    return this.http.post<User> (`${this.baseUrl}/login`, user)
+    return this.http.post<User> (`${this.baseUrl}/login`, user, this.httpOptions)
   }
 
   logout() {
     return this.http.post<User> (`${this.baseUrl}/logout`, undefined)
   }
-  getEmployees(page: number, pageSize: number): Observable<any> {
-    const params = {
-      page: page.toString(),
-      pageSize: pageSize.toString()
-    };
-    return this.http.get(`${this.baseUrl}/employees`, { params });
+  getEmployees(param: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/employees/search`, param, this.httpOptions);
   }
 }
 

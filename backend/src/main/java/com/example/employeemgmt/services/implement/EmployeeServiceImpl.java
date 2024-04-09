@@ -46,13 +46,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         if (searchKey != null && !searchKey.isEmpty()) {
             return switch (searchKey) {
                 case "firstName" -> employeeRepository.findByFirstName(searchValue, pageRequest);
+                case "username" -> employeeRepository.findByUsername(searchValue, pageRequest);
                 case "email" -> employeeRepository.findByEmail(searchValue, pageRequest);
                 case "lastName" -> employeeRepository.findByLastName(searchValue, pageRequest);
                 case "joinDate" -> employeeRepository.findByJoinDate(searchValue, pageRequest);
-                default -> null;
+                default -> employeeRepository.findAll(pageRequest);
             };
+        } else {
+            return employeeRepository.findAll(pageRequest);
         }
-        return null;
     }
 
     @Override
