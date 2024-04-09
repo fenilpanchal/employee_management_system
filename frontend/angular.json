@@ -34,12 +34,12 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/css/sb-admin-2.css",
               "src/assets/vendor/fontawesome-free/css/all.css"
             ],
             "scripts": [ 
               "src/assets/vendor/jquery/jquery.min.js",
-              "src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js",
               "src/assets/vendor/jquery-easing/jquery.easing.min.js",
               "src/assets/js/sb-admin-2.js",
               "src/assets/vendor/chart.js/Chart.js",
@@ -108,7 +108,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
               
             ],
