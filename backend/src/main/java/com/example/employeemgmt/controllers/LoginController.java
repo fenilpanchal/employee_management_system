@@ -14,7 +14,6 @@ import java.util.Optional;
 
 
 @RestController
-@CrossOrigin
 public class LoginController {
 
     private final LoginService loginService;

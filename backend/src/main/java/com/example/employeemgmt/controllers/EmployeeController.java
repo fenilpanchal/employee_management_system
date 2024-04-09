@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
+import java.util.Map;
+
 
 /**
- * @author Steven Horng
+ * @author Fenil P
  */
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("/employees")
 public class EmployeeController {
 
@@ -47,6 +48,11 @@ public class EmployeeController {
     public Page<User> searchEmployees(@Valid @RequestBody UserSearchRequest userSearchRequest,
                                       HttpServletRequest request) {
         return employeeService.searchEmployees(userSearchRequest);
+    }
+
+    @GetMapping("/test")
+    public Object test() {
+        return Map.of("data", "data");
     }
 
     @PutMapping("/update/{id}")

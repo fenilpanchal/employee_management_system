@@ -12,13 +12,12 @@
 //import java.util.List;
 //
 ///**
-// * @author Steven Horng
+// * @author Fenil P
 // */
 //
 //
 //@Slf4j
 //@RestController
-//@CrossOrigin
 //@RequestMapping("/promotion")
 //public class PromotionController {
 //    private final PromotionService promotionService;

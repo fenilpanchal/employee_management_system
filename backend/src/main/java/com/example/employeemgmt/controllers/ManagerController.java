@@ -14,12 +14,11 @@
 //
 //
 ///**
-// * @author Steven Horng
+// * @author Fenil P
 // */
 //
 //
 //@RestController
-//@CrossOrigin
 //public class ManagerController {
 //
 //    private final ManagerService managerService;

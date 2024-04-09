@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit{
       console.info(data);
       // Condition: isAdmin
       if (data && data.admin) {
+        localStorage.setItem("user", JSON.stringify(data));
         this.route.navigate(['/admin-emp']);
       } else {
         this.route.navigate(['/employee']);

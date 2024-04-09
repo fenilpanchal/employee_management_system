@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@CrossOrigin
 public class AdminController {
 
     private final SignupRepository signupRepository;

@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * @author Steven Horng
+ * @author Fenil P
  */
 
 
 @Slf4j
 @RestController
-@CrossOrigin
 @RequestMapping("/users")
 public class UserController {
     //new add
