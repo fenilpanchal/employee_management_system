@@ -68,7 +68,7 @@ export class AdminEmpComponent implements OnInit {
 	closeResult = '';
 
 	open() {
-		this.modalService.open(DropdownComponent, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+		this.modalService.open(DropdownComponent, { ariaLabelledBy: 'modal-basic-title', backdrop: false }).result.then(
 			(result) => {
 				this.closeResult = `Closed with: ${result}`;
 			},

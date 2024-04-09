@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 // import { ModalDismissReasons, NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -12,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './dropdown.component.scss'
 })
 export class DropdownComponent {
+  
+  modal = inject(NgbActiveModal);
 
 	employeeGender: any;
 	employeeName: any;
