@@ -4,8 +4,8 @@ import com.example.employeemgmt.exceptions.CannotBeNullException;
 import com.example.employeemgmt.exceptions.DuplicateEntryException;
 import com.example.employeemgmt.exceptions.IdDoesNotExistException;
 import com.example.employeemgmt.exceptions.PasswordIsIncorrectException;
-import com.example.employeemgmt.repositories.UserRepository;
 import com.example.employeemgmt.models.User;
+import com.example.employeemgmt.repositories.UserRepository;
 import com.example.employeemgmt.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,10 +35,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getListUser(){
-        return (List<User>) userRepository.findAll();
+    public List<User> getListUser() {
+        return userRepository.findAll();
     }
-
 
 
     @Override

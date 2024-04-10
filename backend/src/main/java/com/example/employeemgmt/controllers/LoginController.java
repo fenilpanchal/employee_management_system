@@ -3,12 +3,14 @@ package com.example.employeemgmt.controllers;
 import com.example.employeemgmt.models.User;
 import com.example.employeemgmt.services.LoginService;
 import com.example.employeemgmt.utils.CookieUtils;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.nio.file.AccessDeniedException;
 import java.util.Optional;
 
@@ -32,7 +34,7 @@ public class LoginController {
     @PostMapping("/logout")
     public ResponseEntity logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AccessDeniedException {
         Cookie[] cookies = CookieUtils.removeCookie(httpServletRequest);
-        for (Cookie cookie: cookies) {
+        for (Cookie cookie : cookies) {
             httpServletResponse.addCookie(cookie);
         }
         return ResponseEntity.ok().build();

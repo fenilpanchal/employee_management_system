@@ -2,6 +2,7 @@ package com.example.employeemgmt.utils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -10,9 +11,9 @@ public class CookieUtils {
     public static Cookie setCookie(String key, String value) {
         Cookie cookie = new Cookie(key, value);
         cookie.setPath("/");
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         cookie.setHttpOnly(true);
-        cookie.setMaxAge(60*60*24);
+        cookie.setMaxAge(60 * 60 * 24);
         return cookie;
     }
 

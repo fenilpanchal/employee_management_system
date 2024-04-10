@@ -1,17 +1,16 @@
 package com.example.employeemgmt.controllers;
 
-
 import com.example.employeemgmt.models.User;
 import com.example.employeemgmt.models.UserSearchRequest;
 import com.example.employeemgmt.services.EmployeeService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
-
-import java.util.Map;
-
+import java.util.Optional;
 
 /**
  * @author Steven Horng
@@ -22,16 +21,13 @@ import java.util.Map;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    @Autowired
+    private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    @GetMapping("/{id}")
+    public Optional<User> fetchInfoById(@Valid @PathVariable("id") Long id) {
+        return employeeService.findById(id);
     }
-
-//    @PostMapping("/search/{id}")
-//    public Optional<User> fetchInfoById(@Valid @PathVariable("id") Long id) {
-//        return employeeService.fetchEmployeeInfo(id);
-//    }
 
     /**
      * {
@@ -46,13 +42,9 @@ public class EmployeeController {
      */
     @PostMapping("/search")
     public Page<User> searchEmployees(@Valid @RequestBody UserSearchRequest userSearchRequest,
-                                      HttpServletRequest request) {
+                                      HttpServletRequest httpServletRequest,
+                                      HttpServletResponse httpServletResponse) {
         return employeeService.searchEmployees(userSearchRequest);
-    }
-
-    @GetMapping("/test")
-    public Object test() {
-        return Map.of("data", "data");
     }
 
     @PutMapping("/update/{id}")

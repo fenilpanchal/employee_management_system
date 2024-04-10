@@ -1,11 +1,10 @@
 package com.example.employeemgmt.services.implement;
 
-import com.example.employeemgmt.exceptions.CannotBeNullException;
 import com.example.employeemgmt.exceptions.DuplicateEntryException;
 import com.example.employeemgmt.exceptions.IdDoesNotExistException;
-import com.example.employeemgmt.repositories.EmployeeRepository;
 import com.example.employeemgmt.models.User;
 import com.example.employeemgmt.models.UserSearchRequest;
+import com.example.employeemgmt.repositories.EmployeeRepository;
 import com.example.employeemgmt.services.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 
 import java.util.Optional;
 
@@ -58,23 +56,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<User> fetchEmployeeInfo(Long id) {
-        Optional<User> employee = employeeRepository.findById(id);
-        if (!employee.isPresent()) {
-            throw new IdDoesNotExistException(String.format("Id %d does not exist", id));
-        }
-        return employee;
-
+    public Optional<User> findById(Long id) {
+        return employeeRepository.findById(id);
     }
 
     @Override
-    public User updateEmployee( User user) {
-
-        try {
-            return employeeRepository.save(user);
-        } catch (Exception e) {
-            throw new CannotBeNullException("Unknown error occurred");
-        }
+    public User updateEmployee(User user) {
+        return employeeRepository.save(user);
     }
 
     @Override
@@ -84,7 +72,6 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IdDoesNotExistException("Id does not exist");
         }
         employeeRepository.deleteById(id);
-
     }
 
 }

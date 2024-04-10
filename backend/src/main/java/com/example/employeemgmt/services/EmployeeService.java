@@ -14,7 +14,7 @@ public interface EmployeeService {
     //Read an individual employee
     Page<User> searchEmployees(UserSearchRequest employee);
 
-    Optional<User> fetchEmployeeInfo(Long id);
+    Optional<User> findById(Long id);
 
     //Update
     User updateEmployee(User user);

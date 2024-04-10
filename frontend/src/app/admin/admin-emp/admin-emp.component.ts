@@ -3,7 +3,7 @@ import { AdminSidebarComponent } from '../common/admin-sidebar/admin-sidebar.com
 import { JsUtils } from '../../js-utils';
 import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpResponse } from '@angular/common/http';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DropdownComponent } from '../../dropdown/dropdown.component';
 
@@ -42,9 +42,14 @@ export class AdminEmpComponent implements OnInit {
       offset: this.currentPage,
       limit: this.pageSize
     };
-    this.userService.getEmployees(params).subscribe((data: any) => {
-        this.employees = data;
-      });
+    this.userService.getEmployees(params)
+    .subscribe((data: any) => {
+      console.info(data.body);
+      // Condition: isAdmin
+      if (data.body && data.body.admin == true) {
+        this.employees = data.body.content;
+      }
+    });
   }
 
   nextPage(): void {

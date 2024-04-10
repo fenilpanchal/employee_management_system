@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Data;
 
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -28,7 +27,7 @@ public class Request implements Serializable {
     private Long id;
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -42,7 +41,7 @@ public class Request implements Serializable {
     @Column(name = "date_of_update")
     private Date dateOfUpdate;
 
-//[DISAPPROVED, PENDING, APPROVED]in status
+    //[DISAPPROVED, PENDING, APPROVED]in status
     @Enumerated(EnumType.STRING)
     private Status status;
 

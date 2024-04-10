@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @Entity
 //@Inheritance (strategy = InheritanceType.SINGLE_TABLE)
-@Table (name = "users", uniqueConstraints = {
+@Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(name = "user_username_unique", columnNames = "username"),
         @UniqueConstraint(name = "user_email_unique", columnNames = "email")
 })
@@ -31,7 +31,7 @@ public class User implements Serializable {
     private Long id;
 
 
-//    @NotEmpty
+    //    @NotEmpty
     @Column(name = "username", nullable = false, length = 255)
     private String username;
 
@@ -107,7 +107,7 @@ public class User implements Serializable {
     @Column(name = "currency")
     private SalaryCurrency salaryCurrency;
 
-    @Column (name = "contract_type", length = 255)
+    @Column(name = "contract_type", length = 255)
     private String contractType;
 
     @Column

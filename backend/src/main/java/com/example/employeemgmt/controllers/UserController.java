@@ -3,13 +3,11 @@ package com.example.employeemgmt.controllers;
 import com.example.employeemgmt.models.User;
 import com.example.employeemgmt.services.UserService;
 import jakarta.validation.Valid;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -22,9 +20,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    //new add
-
-
 
     private final UserService userService;
 
@@ -32,20 +27,18 @@ public class UserController {
         this.userService = userService;
     }
 
-    //Save
     @PostMapping("/add")
     public User saveUser(@Valid @RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    //Read
     @GetMapping("/pagination")
-    public ResponseEntity<Page<User>> fetchUserList(@Valid @RequestParam int pageNumber , @RequestParam int pageSize) {
+    public ResponseEntity<Page<User>> fetchUserList(@Valid @RequestParam int pageNumber, @RequestParam int pageSize) {
         return new ResponseEntity<>(userService.fetchUserList(pageNumber, pageSize), HttpStatus.OK);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<User>> getListUser (){
+    public ResponseEntity<List<User>> getListUser() {
         List<User> list = userService.getListUser();
         ResponseEntity<List<User>> showListUser = new ResponseEntity<>(list, HttpStatus.OK);
         return showListUser;
@@ -68,5 +61,4 @@ public class UserController {
     }
 
 
-
-        }
+}
