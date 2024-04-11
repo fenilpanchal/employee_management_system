@@ -27,7 +27,7 @@ public class AuthConfig extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        if (EXCLUDED_URL.contains(request.getRequestURI())) {
+        if (EXCLUDED_URL.contains(request.getRequestURI()) || request.getMethod().equalsIgnoreCase("OPTIONS")) {
             filterChain.doFilter(request, response);
             return;
         } else if (!CookieUtils.isCookieExist(request, "user")) {
