@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../user.service';
 
@@ -9,21 +9,24 @@ import { UserService } from '../../../user.service';
   templateUrl: './admin-sidebar.component.html',
   styleUrl: './admin-sidebar.component.scss'
 })
-export class AdminSidebarComponent implements OnInit {
+export class AdminSidebarComponent {
 
-  constructor(private userservice:UserService,private router:Router){}
-  ngOnInit(): void {
+  constructor(private userservice:UserService,
+    private router:Router){
+
   }
 
-  logout(){
+  logout() {
     console.log("user is logout")
     this.userservice.logout()
-.subscribe((data:any)=>{
-  console.info(data);
-  this.router.navigate(['/login'])
-})
-
-
-    // this.router.navigate(['/List'])
+    .subscribe((data: any) => {
+      console.info(data.body);
+      // Condition: isAdmin
+        localStorage.clear();
+        this.router.navigate(['/']);
+      
+    }, (error) => {
+      console.error(error);
+    });
   }
 }

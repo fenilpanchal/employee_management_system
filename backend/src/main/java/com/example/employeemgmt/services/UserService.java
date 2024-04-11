@@ -1,24 +1,24 @@
 package com.example.employeemgmt.services;
 
 import com.example.employeemgmt.models.User;
+import com.example.employeemgmt.models.UserSearchRequest;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
-    //Save
-    User saveUser(User user);
 
-    //Read
-    Page<User> fetchUserList(int pageNumber, int pageSize);
+    //Create Employee
+    User saveEmployee(User user);
 
-    //Update
-    User updateUser(User user, Long Id);
+    //Read an individual employee
+    Page<User> searchEmployees(UserSearchRequest employee);
+
+    Optional<User> findById(Long id);
 
     //Delete
-    void deleteUserById(Long id);
+    void deleteEmployeeById(Long id);
 
-    List<User> getListUser();
-
-
+    Optional<User> findByUsernameAndPassword(String username, String password);
 }
+

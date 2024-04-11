@@ -4,8 +4,11 @@ import lombok.Data;
 
 @Data
 public class SignUpDto {
-    private String name;
+    private Long id;
+    private String firstName;
+    private String lastName;
     private String username;
+    private Long joinDate;
     private String email;
     private String password;
 }

@@ -2,7 +2,7 @@
 //
 //import com.stevenhornghub.promotionrequest.models.Managers;
 //import models.com.example.employeemgmt.User;
-//import services.com.example.employeemgmt.EmployeeService;
+//import services.com.example.employeemgmt.UserService;
 //import com.stevenhornghub.promotionrequest.services.ManagerService;
 //import jakarta.validation.Valid;
 //import lombok.AllArgsConstructor;
@@ -22,9 +22,9 @@
 //public class ManagerController {
 //
 //    private final ManagerService managerService;
-//    private final EmployeeService employeeService;
+//    private final UserService employeeService;
 //
-//    public ManagerController(ManagerService managerService, EmployeeService employeeService) {
+//    public ManagerController(ManagerService managerService, UserService employeeService) {
 //        this.managerService = managerService;
 //        this.employeeService = employeeService;
 //    }

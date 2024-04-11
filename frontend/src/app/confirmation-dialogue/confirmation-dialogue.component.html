@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-title">{{dialogOptions?.title}}</h4>
+    <button
+        type="button"
+        class="btn-close"
+        aria-describedby="modal-title"
+        (click)="closeDialog(false)"
+    ></button>
+</div>
+<div class="modal-body">
+    <p><strong>{{dialogOptions?.message}}</strong></p>
+    <p>{{dialogOptions?.description}}</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="closeDialog(false)">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="closeDialog(true)">Ok</button>
+</div>

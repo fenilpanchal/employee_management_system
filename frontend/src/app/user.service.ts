@@ -20,25 +20,25 @@ export class UserService {
   };  
   
   constructor(private http:HttpClient) { }
-  
-  signupuser(user: User) {
-    console.log("User...");
-  }
 
-  addUser(user: User) {
-    console.log(user)
+  login(user: User) {
     return this.http.post<User> (`${this.baseUrl}/login`, user, this.httpOptions);
   }
 
   logout() {
     return this.http.post<User> (`${this.baseUrl}/logout`, undefined, this.httpOptions);
   }
+
   getEmployees(param: any): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/employees/search`, param, this.httpOptions);
+    return this.http.post(`${this.baseUrl}/admin/search`, param, this.httpOptions);
   }
-  getUsers(param: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users/list`, this.httpOptions);
+
+  addEmployee(user: any) {
+    console.log(user)
+    return this.http.post<User> (`${this.baseUrl}/admin/employees/add`, user, this.httpOptions)
+  }
+
+  deleteEmployee(id: number) {
+    return this.http.delete<any> (`${this.baseUrl}/admin/employee/delete/${id}`, this.httpOptions);
   }
 }
-
-

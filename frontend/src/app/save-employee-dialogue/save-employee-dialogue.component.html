@@ -1,0 +1,62 @@
+
+<form (ngSubmit)="onSubmit()" #employeeForm="ngForm">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+			<div class="mb-3">
+				<label for="name">Username</label>
+				<input [(ngModel)]="employee.username" type="text" id="employeeName" class="form-control" placeholder="Enter employee name" 
+				 [ngModelOptions]="{standalone: true}"/>
+			</div>
+			<div class="mb-3">
+				<label for="name">First Name</label>
+				<input [(ngModel)]="employee.firstName" type="text" id="employeeName" class="form-control" placeholder="Enter employee firstname" 
+				 [ngModelOptions]="{standalone: true}"/>
+			</div>
+			<div class="mb-3">
+				<label for="name">Last Name</label>
+				<input [(ngModel)]="employee.lastName" type="text" id="employeeName" class="form-control" placeholder="Enter employee lastname" 
+				 [ngModelOptions]="{standalone: true}"/>
+			</div>
+			<div class="mb-3">
+				<label for="employeeEmail">Email</label>
+				<input [(ngModel)]="employee.email" type="text" id="employeeEmail" class="form-control" placeholder="Enter employee email" 
+				 [ngModelOptions]="{standalone: true}"/>
+			</div>
+			<div class="mb-3">
+				<label for="employeePassword">Password</label>
+				<input [(ngModel)]="employee.password" type="text" id="employeePassword" class="form-control" placeholder="Enter employee password" 
+				 [ngModelOptions]="{standalone: true}"/>
+			</div>
+			<!-- <div class="mb-3">
+				<label for="employeeGender">Employee Gender</label>
+				<select id="employeeGender" class="form-control" 
+				[(ngModel)]="employeeGender" [ngModelOptions]="{standalone: true}">
+					<option value="Male">Male</option>
+					<option value="Female">Female</option>
+					<option value="Other">Other</option>
+				</select>
+			</div> -->
+			<div class="mb-3">
+
+				<!-- <label for="dateOfBirth">Date of birth</label> -->
+				<div class="input-group">
+					<!-- <input
+						id="dateOfBirth"
+						class="form-control"
+						placeholder="yyyy-mm-dd"
+						name="dp"
+						ngbDatepicker
+						#dp="ngbDatepicker"
+					/> -->
+					<!-- <button class="btn btn-outline-secondary bi bi-calendar3" (click)="dp.toggle()" type="button">B</button> -->
+				</div>
+			</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-outline-dark">Save</button>
+	</div>
+
+</form>

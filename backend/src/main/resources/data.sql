@@ -1,1 +1,0 @@
-insert into users (username,password,email,is_admin) select * from (select 'admin','admin@123','admin@gmail.com',true ) as tmp where not exists(select username from users where username = 'admin') limit 1;

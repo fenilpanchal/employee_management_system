@@ -1,95 +1,123 @@
-import { Component, OnInit, TemplateRef, inject } from '@angular/core';
+import { Component, NgModule, OnInit, TemplateRef, inject, model } from '@angular/core';
 import { AdminSidebarComponent } from '../common/admin-sidebar/admin-sidebar.component';
 import { JsUtils } from '../../js-utils';
 import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
-import { HttpClientModule, HttpResponse } from '@angular/common/http';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DropdownComponent } from '../../dropdown/dropdown.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalDismissReasons, NgbModal, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { SaveEmployeeDialogueComponent } from '../../save-employee-dialogue/save-employee-dialogue.component';
+import { CommonModule } from '@angular/common';
+import { ConfirmationDialogueComponent } from '../../confirmation-dialogue/confirmation-dialogue.component';
 
 @Component({
   // host: {ngSkipHydration: 'true'},
   selector: 'app-admin-emp',
   standalone: true,
   imports: [AdminSidebarComponent,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    NgbPaginationModule
   ],
   templateUrl: './admin-emp.component.html',
   styleUrl: './admin-emp.component.scss',
   providers: [HttpClientModule, UserService, JsUtils]
+
 })
 export class AdminEmpComponent implements OnInit {
-  
+
+  private modalService = inject(NgbModal);
+
   constructor(private route :Router,
     private userService: UserService
   ) {}
   
-  employees: any[] = [
-    { id: 1, "firstName": "Dilip"}
-  ];
+  employees: any[] = [];
+  
+  employeeSearchOptions = {
+    searchKey: undefined,
+    searchValue: undefined,
+    sortBy: "firstName",
+    offset: 0,
+    limit: 10,
+    totalElements: 0,
+    totalPages: 0,
+    previousPage: 0
+  };
   currentPage = 0;
-  pageSize = 100;
 
   ngOnInit(): void {
-    this.loadEmployees();
+    // this.loadEmployees(this.employeeSearchOptions);
+    // this.pageChange(0);
   }
 
-  loadEmployees(): void {
-    const params = {
-      searchKey: undefined,
-      searchValue: undefined,
-      sortBy: "firstName",
-      offset: this.currentPage,
-      limit: this.pageSize
-    };
-    this.userService.getEmployees(params)
-    .subscribe((data: any) => {
-      console.info(data.body);
-      // Condition: isAdmin
-      if (data.body && data.body.admin == true) {
-        this.employees = data.body.content;
-      }
+  pageChange(page: number) {
+    this.employeeSearchOptions.offset = page - 1;
+    this.loadEmployees(this.employeeSearchOptions);
+  }
+
+  loadEmployees(employeeSearchOptions: any): void {
+    this.userService.getEmployees(employeeSearchOptions).subscribe((data: any) => {
+      this.employees = data.body.content;
+      this.employeeSearchOptions.totalElements = data.body.totalElements;
     });
   }
 
-  nextPage(): void {
-    this.currentPage++;
-    this.loadEmployees();
-  }
-
-  prevPage(): void {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.loadEmployees();
-    }
-  }
-
-  // logout(){
-  //   console.log ('leave')
-  //   this.userService.logout().subscribe((data:any)=>{
-  //     console.info(data);
-  //     this.route.navigate(['/'])
-  //   })
-    
+  // nextPage(): void {
+  //   this.currentPage++;
+  //   this.loadEmployees();
   // }
-  // user(user: any) {
-    
+
+  // prevPage(): void {
+  //   if (this.currentPage > 1) {
+  //     this.currentPage--;
+  //     this.loadEmployees();
+  //   }
   // }
-  
 
-  private modalService = inject(NgbModal);
-	closeResult = '';
 
-	open() {
-		this.modalService.open(DropdownComponent, { ariaLabelledBy: 'modal-basic-title', backdrop: false }).result.then(
+	open(employee:any) {
+		const modalRef=this.modalService.open(SaveEmployeeDialogueComponent, { ariaLabelledBy: 'modal-basic-title', backdrop: false });
+    modalRef.componentInstance.employee=employee;
+    modalRef.result.then(
 			(result) => {
-				this.closeResult = `Closed with: ${result}`;
+        if (result != undefined) {
+          this.userService.addEmployee(result).subscribe(data => {
+            this.loadEmployees(this.employeeSearchOptions);
+          }); 
+        }
 			},
 			(reason) => {
-				this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        console.log(reason);
 			},
 		);
 	}
+
+
+  deleteEmployee(empployee: any){
+		const modalRef=this.modalService.open(ConfirmationDialogueComponent, { ariaLabelledBy: 'modal-basic-title', backdrop: false });
+    modalRef.componentInstance.dialogOptions = {
+      title: "Delete Employee",
+      message: "Are you sure you want to delete `" + empployee.username + "` employee?"
+    };
+    modalRef.result.then(
+			(result) => {
+        if (result == true) {
+          this.userService.deleteEmployee(empployee.id).subscribe((response: any) => {
+            console.log('Data delete seccessfully',response);
+            this.loadEmployees(this.employeeSearchOptions);
+            
+          },
+          (error: any) => {
+            console.error('Error deleteing data',error);
+          }
+        );
+        }
+			},
+			(reason) => {
+        console.log(reason);
+			},
+		);
+  }
 
 	private getDismissReason(reason: any): string {
 		switch (reason) {

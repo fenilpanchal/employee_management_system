@@ -1,13 +1,11 @@
 
-
-<button class="btn btn-outline-primary" type="button" (click)="open()">Add</button>
 <!-- Page Wrapper -->
 <div id="wrapper">
     
     <app-admin-sidebar></app-admin-sidebar>
     
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper">
         
         <!-- Main Content -->
         <div class="container mt-4">
@@ -16,9 +14,9 @@
             
             
             <!-- Search bar -->
-            <div class="input-group mb-3">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" (click)="open()">Add</button>
+            <div class="input-group mb-3" >
+                <div class="input-group-append" >
+                    <button class="btn btn-outline-primary" type="button" (click)="open({})">Add</button>
                 </div>
             </div>
 
@@ -35,72 +33,39 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>FirstName</th>
+                        <th>lastName</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- Loop through employees -->
-                    <tr>
-                        <td>1</td>
-                        <td>John Doe</td>
-                        <td>john_example.com</td>
+                    <!-- <tr *ngFor="let employee of employees"> -->
+                        <tr *ngFor="let employee of employees">
+                        <td>{{employee.id}}</td>
+                        <td>{{employee.firstName}}</td>
+                        <td>{{employee.lastName}}</td>
+                        <td>{{employee.username}}</td>
+                        <td>{{employee.email}}</td>
                         <td>
-                            <button class="btn btn-sm btn-primary mr-2">Edit</button>
-                            <button class="btn btn-sm btn-danger">Delete</button>
+                            <button class="btn btn-sm btn-primary mr-2" (click)="open(employee)">Edit</button>
+                            
+                            <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee)">Delete</button>
                         </td>
                     </tr>
                     <!-- Repeat rows for other employees -->
                 </tbody>
             </table>
-
-
-            <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
- 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
-            
-
-
-
-            <!-- Pagination -->
-            <nav aria-label="Page navigation">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+     
+            <ngb-pagination
+                [collectionSize]="employeeSearchOptions.totalElements"
+                [(page)]="currentPage"
+                [boundaryLinks]="true"
+                (pageChange)="pageChange($event)" />
         </div>
         
-        <!-- End of Main Content -->
-        
-        <!-- Footer -->
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
@@ -108,35 +73,14 @@
                 </div>
             </div>
         </footer>
-        <!-- End of Footer -->
-        
     </div>
     <!-- End of Content Wrapper -->
     
 </div>
 <!-- End of Page Wrapper -->
-
+  
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
-
-<!-- Logout Modal-->
-<!-- <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" (click)="logout()" >Logout</a>
-        </div>
-    </div>
-</div>
-</div> -->
+<!-- Footer -->

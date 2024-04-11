@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
   
   login() {
     console.log("user is login")
-    this.userservice.addUser(this.user)
+    this.userservice.login(this.user)
     .subscribe((data: any) => {
       console.info(data.body);
       // Condition: isAdmin
