@@ -19,7 +19,7 @@ public class CookieUtils {
 
     public static boolean isCookieExist(HttpServletRequest httpServletRequest, String key) {
         Cookie[] cookies = httpServletRequest.getCookies();
-        if (Objects.isNull(cookies) || cookies.length <= 0) {
+        if (Objects.isNull(cookies) || cookies.length == 0) {
             return false;
         }
         return Arrays.stream(cookies).anyMatch(cookie -> key.equalsIgnoreCase(cookie.getName()));

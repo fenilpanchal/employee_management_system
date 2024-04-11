@@ -4,16 +4,13 @@ import com.example.employeemgmt.models.SignUpDto;
 import com.example.employeemgmt.models.User;
 import com.example.employeemgmt.repositories.SignupRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/admin")
-
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200/", allowedHeaders = "*")
 public class AdminController {
 
     private final SignupRepository signupRepository;

@@ -14,11 +14,10 @@ import java.util.List;
 /**
  * @author Steven Horng
  */
-
-
 @Slf4j
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200/", allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;

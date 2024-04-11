@@ -33,7 +33,7 @@ export class UserService {
   logout() {
     return this.http.post<User> (`${this.baseUrl}/logout`, undefined, this.httpOptions);
   }
-  getEmployees(param: any): Observable<any> {
+  getEmployees(param: any): Observable<Object> {
     return this.http.post(`${this.baseUrl}/employees/search`, param, this.httpOptions);
   }
   getUsers(param: any): Observable<any> {

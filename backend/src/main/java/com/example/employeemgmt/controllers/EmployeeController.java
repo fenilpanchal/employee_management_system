@@ -15,10 +15,9 @@ import java.util.Optional;
 /**
  * @author Steven Horng
  */
-
-
 @RestController
 @RequestMapping("/employees")
+@CrossOrigin(allowCredentials = "true", origins = "http://localhost:4200/", allowedHeaders = "*")
 public class EmployeeController {
 
     @Autowired
